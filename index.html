@@ -309,19 +309,47 @@
     }
 
     .featured-right {
-      position: relative;
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.2)),
-        url("images/featured-bg.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.2)),
+    url("images/featured-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.featured-download-btn {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: 0.2s ease;
+}
+
+.featured-download-btn:hover {
+  background: rgba(185,14,14,0.22);
+  border-color: rgba(255,255,255,0.28);
+  transform: translateY(-2px);
+}
+
+.featured-download-btn i {
+  font-size: 0.95rem;
+}
 
     .featured-logo-block {
       position: relative;
@@ -716,6 +744,13 @@
   }
 
     }
+
+    @media (max-width: 768px) {
+  .featured-download-btn {
+    padding: 12px 18px;
+    font-size: 0.88rem;
+  }
+}
   </style>
 </head>
 <body>
@@ -775,12 +810,19 @@
         </iframe>
       </div>
 
-      <div class="featured-right">
-        <div class="featured-logo-block">
-          <img src="images/echolyte-logo.png" alt="Echolyte The Curse of Tsuyuhane logo">
-        </div>
-      </div>
-    </div>
+    <div class="featured-right">
+  <div class="featured-logo-block">
+    <img src="images/echolyte-logo.png" alt="Echolyte The Curse of Tsuyuhane logo">
+  </div>
+
+  <a class="featured-download-btn" 
+   href="https://dl.patchkit.net/d/3bqchyh4sjh5q2h6f7vkv" 
+   target="_blank" 
+   rel="noopener noreferrer">
+  <i class="fas fa-download"></i>
+  Download Game
+</a>
+</div>
   </section>
 
   <section class="playlist-section" id="projects">
