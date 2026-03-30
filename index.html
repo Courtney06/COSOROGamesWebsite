@@ -619,47 +619,159 @@
         width: min(var(--container), calc(100% - 32px));
       }
 
-      .nav {
-        padding: 16px 16px;
-        gap: 12px;
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    .nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  min-height: var(--nav-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 32px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.86), rgba(0,0,0,0.36), transparent);
+  backdrop-filter: blur(8px);
+}
 
-      .nav-links {
-        gap: 14px 18px;
-      }
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 2vw, 2.4rem);
+  letter-spacing: 0.05em;
+  color: white;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1002;
+}
 
-      .nav-links a {
-        font-size: 0.82rem;
-      }
+.nav-links {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
 
-      .hero-left-character {
-        width: 46vw;
-        height: 72vh;
-        opacity: 0.45;
-      }
+.nav-links a {
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.94);
+  transition: opacity 0.2s ease;
+}
 
-      .hero-right-character {
-        right: -18vw;
-        bottom: -6vh;
-        width: 42vw;
-        height: 60vh;
-        opacity: 0.35;
-      }
+.nav-links a:hover {
+  opacity: 0.75;
+}
 
-      .hero-content {
-        padding: calc(var(--nav-height) + 28px) 16px 56px;
-      }
+.nav-toggle {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.45);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1002;
+}
 
-      .about,
-      .featured,
-      .playlist-section,
-      .pdf-section {
-        padding: var(--section-padding) 0;
-      }
+.nav-toggle span {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
 
-     .featured-layout {
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (max-width: 780px) {
+  :root {
+    --nav-height: 84px;
+    --section-padding: 72px;
+  }
+
+  .container,
+  .about-layout,
+  .featured-layout,
+  .playlist-wrapper,
+  .pdf-layout,
+  .footer-inner {
+    width: min(var(--container), calc(100% - 32px));
+  }
+
+  .nav {
+    padding: 16px;
+    align-items: center;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 10px 0;
+    background: rgba(0,0,0,0.95);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .nav-links.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 0.84rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-links a:last-child {
+    border-bottom: none;
+  }
+
+  .hero-content {
+    padding: calc(var(--nav-height) + 28px) 16px 56px;
+  }
+
+  .about,
+  .featured,
+  .playlist-section,
+  .pdf-section {
+    padding: var(--section-padding) 0;
+  }
+
+  .featured-layout {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -689,17 +801,18 @@
     height: auto;
   }
 
-      .playlist-heading {
-        font-size: clamp(2rem, 11vw, 3.8rem);
-      }
+  .playlist-heading {
+    font-size: clamp(2rem, 11vw, 3.8rem);
+  }
 
-      .flipbook-hint {
-        font-size: 1.5rem;
-      }
+  .flipbook-hint {
+    font-size: 1.5rem;
+  }
 
-      .footer {
-        padding-bottom: 28px;
-      }
+  .footer {
+    padding-bottom: 28px;
+  }
+}
     }
 @media (max-width: 560px) {
   .hero {
@@ -754,17 +867,24 @@
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="nav-brand">COSORO GAMES</div>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#featured">Featured Game</a>
-      <a href="#projects">Projects</a>
-      <a href="#development">Development</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
+<nav class="nav">
+  <div class="nav-brand">COSORO GAMES</div>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#featured">Featured Game</a>
+    <a href="#projects">Projects</a>
+    <a href="#development">Development</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
   <section class="hero" id="home">
     <div class="hero-left-character">
@@ -853,7 +973,6 @@
           <img id="pdfPageImage" src="pdf/1.png" alt="PDF page 1">
         </div>
 
-        <div class="flipbook-hint">tap arrows to browse through</div>
 
         <div class="flip-controls">
           <button type="button" id="prevBtn">Previous</button>
@@ -928,6 +1047,24 @@
     });
 
     renderPage();
+
+    const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+const navItems = navLinks.querySelectorAll("a");
+
+navToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("active");
+  navToggle.classList.toggle("active");
+  navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+});
+
+navItems.forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("active");
+    navToggle.classList.remove("active");
+    navToggle.setAttribute("aria-expanded", "false");
+  });
+});
   </script>
 </body>
 </html>
